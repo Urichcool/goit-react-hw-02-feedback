@@ -1,10 +1,17 @@
 import React from "react";
-import{FeedbackVidgetButtonList,
-    FeedbackVidgetButtonItem,
-    FeedbackVidgetButton} from './feedback-vidget.styled'
+import PropTypes from 'prop-types';
+import {
+  FeedbackVidgetButtonList,
+  FeedbackVidgetButtonItem,
+  FeedbackVidgetButton,
+  FeedbackVidgetTitle,
+  FeedbackVidgetStatisticSection
+} from './feedback-vidget.styled';
 
-const FeedbackVidgetControls = ({ onIncrementGood, onIncrementNeutral, onIncrementBad }) => {
-    return (
+const FeedbackVidgetControls = ({title, onIncrementGood, onIncrementNeutral, onIncrementBad }) => {
+  return (
+    <FeedbackVidgetStatisticSection>
+      <FeedbackVidgetTitle>{title}</FeedbackVidgetTitle>
       <FeedbackVidgetButtonList>
         <FeedbackVidgetButtonItem>
           <FeedbackVidgetButton
@@ -34,7 +41,15 @@ const FeedbackVidgetControls = ({ onIncrementGood, onIncrementNeutral, onIncreme
           </FeedbackVidgetButton>
         </FeedbackVidgetButtonItem>
       </FeedbackVidgetButtonList>
-    );
+    </FeedbackVidgetStatisticSection>
+  );
 };
 
 export default FeedbackVidgetControls;
+
+FeedbackVidgetControls.propTypes = {
+  title: PropTypes.string.isRequired,
+  onIncrementGood: PropTypes.func.isRequired,
+  onIncrementNeutral: PropTypes.func.isRequired,
+  onIncrementBad: PropTypes.func.isRequired
+};

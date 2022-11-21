@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {FeedbackVidgetContainer} from './feedback-vidget.styled';
 import FeedbackVidgetControls from './feedback-vidget-controls';
 import FeedbackVidgetStatistic from './feedback-vidget-statistic';
-import FeedbackVidgetSection from './feedback-vidget-section';
+import FeedbackVidgetNotification from './feedback-vidget-notification';
 
 class FeedbackVidget extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-    total: 0,
+  static propTypes = {
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired
   };
 
+  state = {
+    good: this.props.good,
+    neutral: this.props.neutral,
+    bad: this.props.bad,
+    total: this.props.total,
+  };
 
   handleIncrementGood = () => {
     this.setState(prevState => {
@@ -40,7 +47,7 @@ class FeedbackVidget extends Component {
     this.countTotalFeedback();
   };
 
-   countTotalFeedback = () => {
+  countTotalFeedback = () => {
     this.setState(prevState => {
       return {
         total: prevState.total + 1,
@@ -49,28 +56,32 @@ class FeedbackVidget extends Component {
   };
 
   countPositiveFeedbackPercentage = () => {
-   return this.state.total !== 0
-? Math.round(this.state.good / this.state.total * 100) 
-: 0 
-  }
+    return this.state.total !== 0
+      ? Math.round((this.state.good / this.state.total) * 100)
+      : 0;
+  };
 
   render() {
     return (
       <FeedbackVidgetContainer>
-        <FeedbackVidgetSection title="Please leave feedback"/>
         <FeedbackVidgetControls
+          title="Please leave feedback"
           onIncrementGood={this.handleIncrementGood}
           onIncrementNeutral={this.handleIncrementNeutral}
           onIncrementBad={this.handleIncrementBad}
         />
-        <FeedbackVidgetSection title="Statistic"/>
-        <FeedbackVidgetStatistic
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.state.total}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
-        />
+        {this.state.total !== 0 ? (
+          <FeedbackVidgetStatistic
+            title="Statistic"
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.state.total}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        ) : (
+          <FeedbackVidgetNotification/>
+        )}
       </FeedbackVidgetContainer>
     );
   }

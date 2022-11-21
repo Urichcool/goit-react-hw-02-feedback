@@ -59,3 +59,10 @@ export const FeedbackVidgetStatisticText = styled.p`
   font-size: 18px;
   margin: 0;
 `;
+
+export const FeedbackVidgetStatisticSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
