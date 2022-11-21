@@ -8,9 +8,7 @@ export const FeedbackVidgetContainer = styled.div`
 height:100vh;
 `
 
-export const FeedbackVidgetTitle = styled.p`
-font-size:25px;
-font-weight:600;
+export const FeedbackVidgetTitle = styled.h2`
     text-transform:uppercase;
     color: #8181ec;
     margin: 0;
@@ -40,7 +38,7 @@ font-size: 18px;
   height: 25px;
   &:hover,
   &:focus {
-    background-color: #8181ec;
+    background-color: #b3b3f1;
   }
 `;
 
