@@ -6,6 +6,7 @@ export const FeedbackVidgetContainer = styled.div`
    justify-content: center;
    align-items: center;
 height:100vh;
+background-color: #dadada;
 `
 
 export const FeedbackVidgetTitle = styled.h2`
